@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="mobile-web-app-capable" content="yes">
+
     <title>Windows 11</title>
     <link rel="shortcut icon"
         href="https://preview.redd.it/sudz5o3s1vn91.png?width=1080&format=png&auto=webp&s=27107d9d26f3b82ee00f53becd873b7bef881744"
@@ -12,13 +14,13 @@
 </head>
 
 <body>
-    <div class="megacontainer">
+    <div class="megacontainer" id="fullScreen" onclick="openFullscreen()">
         <div class="screen">
             <div class="wallpaper">
                 <div class="task-bar">
                     <div class="task-bar-left-box"></div>
                     <div class="task-bar-center-box">
-                        <div class="window-start-button">
+                        <div class="window-start-button" title="Start">
                             <img class="window-start-button-icon"
                                 src="https://preview.redd.it/sudz5o3s1vn91.png?width=1080&format=png&auto=webp&s=27107d9d26f3b82ee00f53becd873b7bef881744"
                                 alt="windows">
@@ -27,7 +29,7 @@
                             <input type="text" placeholder="Serach" id="SearchBar" class="search-bar">
                         </div>
                         <div class="task-bar-app-box">
-                            <div class="task-bar-app">
+                            <div class="task-bar-app" title="Copilot (preview)">
                                 <img src="https://www.tenforums.com/geek/gars/images/2/types/thumb_17004120060_opilot.png"
                                     alt="copilot" class="task-bar-app-icon">
                             </div>
@@ -35,19 +37,19 @@
                                 <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/b188dfee-f322-438e-ad5b-6f311a714d5d/derlijj-e91e6d53-c205-4506-b729-b6e60bd71608.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2IxODhkZmVlLWYzMjItNDM4ZS1hZDViLTZmMzExYTcxNGQ1ZFwvZGVybGlqai1lOTFlNmQ1My1jMjA1LTQ1MDYtYjcyOS1iNmU2MGJkNzE2MDgucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.4ozBsvovwLbtJw7Dz1hF5tHo-aTVXhCUFT1ECbv2MpI"
                                     alt="task view" class="task-bar-app-icon">
                             </div>
-                            <div class="task-bar-app">
+                            <div class="task-bar-app" title="File Explorer">
                                 <img src="https://winaero.com/blog/wp-content/uploads/2018/12/file-explorer-folder-libraries-icon-18298.png"
                                     alt="file explorer" class="task-bar-app-icon">
                             </div>
-                            <div class="task-bar-app">
+                            <div class="task-bar-app" title="Chrome">
                                 <img src="https://cdn1.iconfinder.com/data/icons/google_jfk_icons_by_carlosjj/512/chrome.png"
                                     alt="Chrome" class="task-bar-app-icon">
                             </div>
-                            <div class="task-bar-app">
+                            <div class="task-bar-app" title="VS Code">
                                 <img src="https://code.visualstudio.com/assets/images/code-stable.png" alt="vs-code"
                                     class="task-bar-app-icon">
                             </div>
-                            <div class="task-bar-app">
+                            <div class="task-bar-app" title="Settings">
                                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Windows_Settings_icon.svg/819px-Windows_Settings_icon.svg.png"
                                     alt="setting" class="task-bar-app-icon">
                             </div>
@@ -63,23 +65,24 @@
                             ENG <br> IN
                         </div>
                         <div class="quick-setting-box">
-                            <div class="wifi-box">
+                            <div class="wifi-box" title="Rishi WIFI     
+GOD access">
                                 <img src="images\wifi_icon.png" alt="" class="quick-setting-icon">
                             </div>
-                            <div class="speaker-box">
+                            <div class="speaker-box" title="Speakers (Realtek(R) Audio):">
                                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSE0jgMnmoSxm1Wr3IE53rPbntwTVgYdSQwDL-Xn26I3A&s"
                                     alt="" class="quick-setting-icon">
                             </div>
-                            <div class="battery-box">
+                            <div class="battery-box" title="See Below, You Blind Person">
                                 <img src="images\battery_icon.png" alt="" class="quick-setting-icon">
                             </div>
                         </div>
                         <div class="time-date-box">
                             <div class="time-date" title="30 April 2024">
-                                <div class="time-box">
+                                <div class="time-box" id="time">
                                     11:20 PM
                                 </div>
-                                <div class="date-box">
+                                <div class="date-box" id="date">
                                     30-04-2024
                                 </div>
                             </div>
@@ -94,5 +97,6 @@
         </div>
     </div>
 </body>
+<script src="script.js"></script>
 
 </html>

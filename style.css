@@ -5,6 +5,7 @@
     text-decoration: none;
     box-sizing: border-box;
     user-select: none;
+    font-family:'Segoe UI';
 }
 
 .megacontainer {
@@ -62,6 +63,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.window-start-button:checked {
+    padding: 20px;
+    background-color: red;
 }
 
 .window-start-button:hover {
@@ -191,8 +197,10 @@
 .battery-box {
     width: 20px; 
     height: 22px;
+    font-size: 10.4px;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
 }
 
@@ -202,11 +210,12 @@
 }
 
 .time-date-box {
-    width: 100px;
+    width: 115px;
     margin: 5px;
+    padding-left: 5px;
     border-radius: 5px;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
 }
 
@@ -215,7 +224,7 @@
 }
 
 .time-date {
-    width: 70px;
+    width: 75px;
     margin-right: 5px;
     font-size: 12px;
     text-align: end;
@@ -227,6 +236,7 @@
 
 .date-box {
     width: 100%;
+    letter-spacing: 1.2px;
 }
 
 .notification-box {
@@ -234,6 +244,6 @@
 }
 
 .notification-icon {
-    width: 23px;
+    width: 22px;
     height: 20px;
 }

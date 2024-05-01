@@ -1,0 +1,37 @@
+<!-- how to add pop up window in js -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Floating Window</title>
+  <style>
+    #window {
+      position: absolute;
+      z-index: 10;
+      left: 350px;
+      top: 160px;
+      width: 400px;
+      background-color: #dde3eb;
+      border: 1px solid #464f5a;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <button onclick="openWindow()">Open Window</button>
+  <div id="window">
+    <h1>Floating Window</h1>
+    <p>This is a floating window.</p>
+    <button onclick="closeWindow()">Close Window</button>
+  </div>
+
+  <script>
+    function openWindow() {
+      document.getElementById("window").style.display = "block";
+    }
+
+    function closeWindow() {
+      document.getElementById("window").style.display = "none";
+    }
+  </script>
+</body>
+</html>

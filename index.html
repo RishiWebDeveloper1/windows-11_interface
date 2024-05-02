@@ -11,12 +11,37 @@
         href="https://preview.redd.it/sudz5o3s1vn91.png?width=1080&format=png&auto=webp&s=27107d9d26f3b82ee00f53becd873b7bef881744"
         type="image/x-icon">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="components/application.css">
 </head>
 
 <body>
     <div class="megacontainer" id="fullScreen" onclick="openFullscreen()">
         <div class="screen">
             <div class="wallpaper">
+                <div class="application-box" id="applicationBox">
+                    <!-- <div class="application">
+                        <div class="title-bar">
+                            <div class="app-name">
+                                vs code
+                            </div>
+                            <div class="operation-box">
+                                <div class="minimize-box">
+                                    <img class="minimize-icon" src="images/minimize_icon.png" alt="">
+                                </div>
+                                <div class="maximize-box">
+                                    <img src="images/maximize_icon.png" class="maximize-icon" alt="">
+                                </div>
+                                <div class="close-box">
+                                    <img src="https://static-00.iconduck.com/assets.00/cross-icon-2048x2048-vz9m0pj3.png" class="close-icon">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="app-page">
+                            <iframex src="https://www.google.com/search?igu=1" width="800px" height="600px" frameborder="0"></iframe>
+                        </div>
+                    </div> -->
+                </div>
+
                 <div class="task-bar">
                     <div class="task-bar-left-box"></div>
                     <div class="task-bar-center-box">
@@ -41,7 +66,7 @@
                                 <img src="https://winaero.com/blog/wp-content/uploads/2018/12/file-explorer-folder-libraries-icon-18298.png"
                                     alt="file explorer" class="task-bar-app-icon">
                             </div>
-                            <div class="task-bar-app" title="Chrome">
+                            <div class="task-bar-app" onclick="createApplication('vs codex', 'https\://www.google.com/search?igu=1')" title="Chrome">
                                 <img src="https://cdn1.iconfinder.com/data/icons/google_jfk_icons_by_carlosjj/512/chrome.png"
                                     alt="Chrome" class="task-bar-app-icon">
                             </div>
@@ -98,5 +123,6 @@ GOD access">
     </div>
 </body>
 <script src="script.js"></script>
+<script src="components/application.js"></script>
 
 </html>

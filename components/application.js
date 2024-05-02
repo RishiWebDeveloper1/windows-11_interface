@@ -20,6 +20,9 @@ function applicationLayoutManager() {
     }
 }
 
+function nothingToDo() {
+    console.log('nothing for do');
+}
 
 function createApplication(text, url) {
     if (noOfApplicatons >= 6) {
@@ -32,8 +35,12 @@ function createApplication(text, url) {
         let applicaton = document.createElement('div');
         applicaton.id = randomId;
         let titleBar = document.createElement('div');
-        let appName = document.createElement('div')
-        let operationBox = document.createElement('div')
+        let appName = document.createElement('div');
+        let test = document.createElement('div');
+        test.onclick = function () {
+            maximizeWindowTest(randomId);
+        }
+        let operationBox = document.createElement('div');
         let minimizeBox = document.createElement('div');
         minimizeBox.onclick = function () {
             minimizeWindow(randomId);
@@ -56,6 +63,7 @@ function createApplication(text, url) {
         titleBar.classList.add('title-bar');
         appName.classList.add('app-name');
         operationBox.classList.add('operation-box');
+        test.classList.add('test');
         minimizeBox.classList.add('minimize-box');
         minimizeIcon.classList.add('minimize-icon');
         maximizeBox.classList.add('maximize-box');
@@ -78,6 +86,7 @@ function createApplication(text, url) {
         operationBox.appendChild(maximizeBox);
         operationBox.appendChild(closeBox);
         titleBar.appendChild(appName);
+        titleBar.appendChild(test);
         titleBar.appendChild(operationBox);
         appPage.appendChild(ifarme);
         applicaton.appendChild(titleBar);
@@ -130,9 +139,31 @@ function minimizeWindow(idName) {
         }
         fullScreenCheck = false;
     }
+
+    let fullScreen = document.getElementById('fullScreen');
+    if (fullScreen.requestFullscreen) {
+        fullScreen.requestFullscreen();
+    }
+    else if (fullScreen.webkitRequestFullscreen) { /* Safari */
+        fullScreen.webkitRequestFullscreen();
+    }
+    else if (fullScreen.msRequestFullscreen) { /* IE11 */
+        fullScreen.msRequestFullscreen();
+    }
 }
 
 function maximizeWindow(idName) {
+    // if (fullScreenCheck == true) {
+    //     if (document.exitFullscreen) {
+    //         document.exitFullscreen();
+    //     } else if (document.webkitExitFullscreen) { /* Safari */
+    //         document.webkitExitFullscreen();
+    //     } else if (document.msExitFullscreen) { /* IE11 */
+    //         document.msExitFullscreen();
+    //     }
+    //     fullScreenCheck = false;
+    // }
+
     let appFullScreen = document.getElementById(idName)
 
     if (appFullScreen.requestFullscreen) {
@@ -145,6 +176,20 @@ function maximizeWindow(idName) {
         appFullScreen.msRequestFullscreen();
     }
     fullScreenCheck = true;
+}
+
+function maximizeWindowTest(idName) {
+    let appFullScreen = document.getElementById(idName)
+
+    if (appFullScreen.requestFullscreen) {
+        appFullScreen.requestFullscreen();
+    }
+    else if (appFullScreen.webkitRequestFullscreen) { /* Safari */
+        appFullScreen.webkitRequestFullscreen();
+    }
+    else if (appFullScreen.msRequestFullscreen) { /* IE11 */
+        appFullScreen.msRequestFullscreen();
+    }
 }
 
 function deleteWindow(idName) {

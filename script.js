@@ -1,11 +1,11 @@
 let time = document.getElementById('time');
 let date = document.getElementById('date');
-let fullScreen = document.getElementById('fullScreen');
 
 document.documentElement.requestFullscreen();
 // window.confirm("how are you!")
 
 function openFullscreen() {
+    let fullScreen = document.getElementById('fullScreen');
     if (fullScreen.requestFullscreen) {
         fullScreen.requestFullscreen();
     }

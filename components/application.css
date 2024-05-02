@@ -35,6 +35,16 @@
     justify-content: flex-end;
 }
 
+.test {
+    width: calc(100% - 300px);
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .minimize-box {
     width: 40px;
     height: 40px;

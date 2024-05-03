@@ -1,109 +1,24 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
-	<style>
-		#dropArea {
-			border: 2px dashed #ccc;
-			padding: 20px;
-			margin-bottom: 20px;
-		}
-
-		#fileDisplayArea {
-			margin-top: 20px;
-		}
-
-		img {
-			max-width: 300px;
-			max-height: 300px;
-		}
-	</style>
+	<link rel="stylesheet" href="file_explorer.css">
 </head>
 
 <body>
-	<input type="file" name="" id="">
 	<div class="iframe-box">
-		<iframe src="file:///C:/" frameborder="0"></iframe>
+		<iframe src="https://tinyfilemanager.github.io/demo/" frameborder="0"></iframe>
 	</div>
-
-
-	<div id="dropArea">
-		<p>Drag and drop an image or text file here</p>
-	</div>
-	<button id="showButton">Show File</button>
-	<div id="fileDisplayArea"></div>
 
 </body>
 
-<script>
-	const dropArea = document.getElementById('dropArea');
-	const showButton = document.getElementById('showButton');
-	const fileDisplayArea = document.getElementById('fileDisplayArea');
-
-	// Prevent default behavior for drag and drop events
-	['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-		dropArea.addEventListener(eventName, preventDefaults, false);
-	});
-
-	function preventDefaults(e) {
-		e.preventDefault();
-		e.stopPropagation();
-	}
-
-	// Handle file drop event
-	dropArea.addEventListener('drop', handleDrop, false);
-
-	function handleDrop(e) {
-		let dt = e.dataTransfer;
-		let files = dt.files;
-
-		handleFiles(files);
-	}
-
-	// Handle files
-	function handleFiles(files) {
-		for (let file of files) {
-			if (file.type.startsWith('image/')) {
-				const reader = new FileReader();
-				reader.readAsDataURL(file);
-				reader.onload = function () {
-					const img = new Image();
-					img.src = reader.result;
-					fileDisplayArea.appendChild(img);
-				}
-			} else if (file.type.startsWith('text/')) {
-				const reader = new FileReader();
-				reader.readAsText(file);
-				reader.onload = function () {
-					const p = document.createElement('p');
-					p.textContent = reader.result;
-					fileDisplayArea.appendChild(p);
-				}
-			}
-		}
-	}
-
-	// Show File button click event
-	showButton.addEventListener('click', function () {
-		fileDisplayArea.innerHTML = ''; // Clear previous content
-		const storedFile = localStorage.getItem('storedFile');
-		if (storedFile) {
-			const p = document.createElement('p');
-			p.textContent = storedFile;
-			fileDisplayArea.appendChild(p);
-		} else {
-			alert('No file stored in the browser!');
-		}
-	});
+</html>
 
 
-</script>
-
-</html> -->
-
+<!-- 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -191,4 +106,4 @@
 	</script>
 </body>
 
-</html>
+</html> -->

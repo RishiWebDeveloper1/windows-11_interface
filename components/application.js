@@ -1,4 +1,5 @@
 let noOfApplicatons = 0;
+console.log(window.matchMedia)
 
 function applicationLayoutManager() {
     let application = document.getElementsByClassName('application');

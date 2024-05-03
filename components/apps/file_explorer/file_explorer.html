@@ -1,0 +1,194 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		#dropArea {
+			border: 2px dashed #ccc;
+			padding: 20px;
+			margin-bottom: 20px;
+		}
+
+		#fileDisplayArea {
+			margin-top: 20px;
+		}
+
+		img {
+			max-width: 300px;
+			max-height: 300px;
+		}
+	</style>
+</head>
+
+<body>
+	<input type="file" name="" id="">
+	<div class="iframe-box">
+		<iframe src="file:///C:/" frameborder="0"></iframe>
+	</div>
+
+
+	<div id="dropArea">
+		<p>Drag and drop an image or text file here</p>
+	</div>
+	<button id="showButton">Show File</button>
+	<div id="fileDisplayArea"></div>
+
+</body>
+
+<script>
+	const dropArea = document.getElementById('dropArea');
+	const showButton = document.getElementById('showButton');
+	const fileDisplayArea = document.getElementById('fileDisplayArea');
+
+	// Prevent default behavior for drag and drop events
+	['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+		dropArea.addEventListener(eventName, preventDefaults, false);
+	});
+
+	function preventDefaults(e) {
+		e.preventDefault();
+		e.stopPropagation();
+	}
+
+	// Handle file drop event
+	dropArea.addEventListener('drop', handleDrop, false);
+
+	function handleDrop(e) {
+		let dt = e.dataTransfer;
+		let files = dt.files;
+
+		handleFiles(files);
+	}
+
+	// Handle files
+	function handleFiles(files) {
+		for (let file of files) {
+			if (file.type.startsWith('image/')) {
+				const reader = new FileReader();
+				reader.readAsDataURL(file);
+				reader.onload = function () {
+					const img = new Image();
+					img.src = reader.result;
+					fileDisplayArea.appendChild(img);
+				}
+			} else if (file.type.startsWith('text/')) {
+				const reader = new FileReader();
+				reader.readAsText(file);
+				reader.onload = function () {
+					const p = document.createElement('p');
+					p.textContent = reader.result;
+					fileDisplayArea.appendChild(p);
+				}
+			}
+		}
+	}
+
+	// Show File button click event
+	showButton.addEventListener('click', function () {
+		fileDisplayArea.innerHTML = ''; // Clear previous content
+		const storedFile = localStorage.getItem('storedFile');
+		if (storedFile) {
+			const p = document.createElement('p');
+			p.textContent = storedFile;
+			fileDisplayArea.appendChild(p);
+		} else {
+			alert('No file stored in the browser!');
+		}
+	});
+
+
+</script>
+
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Drag and Drop Image Upload</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+			background-color: #f9f9f9;
+		}
+
+		#dropArea {
+			border: 2px dashed #ccc;
+			padding: 20px;
+			text-align: center;
+			cursor: pointer;
+		}
+
+		#imagePreview {
+			margin-top: 20px;
+			max-width: 300px;
+			max-height: 300px;
+		}
+
+		#showButton {
+			margin-top: 20px;
+			padding: 10px 20px;
+			background-color: #3f88f8;
+			color: #fff;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div id="dropArea" ondragover="handleDragOver(event)" ondrop="handleFileDrop(event)">
+		<p>Drag & Drop Images Here</p>
+		<input type="file" id="fileInput" accept="image/*" style="display: none;">
+	</div>
+
+	<img id="imagePreview" src="#" alt="Preview">
+
+	<button id="showButton" onclick="showImage()">Show Image</button>
+
+
+	<script>
+		function handleDragOver(event) {
+			event.preventDefault();
+			event.dataTransfer.dropEffect = 'copy';
+		}
+
+		function handleFileDrop(event) {
+			event.preventDefault();
+			const file = event.dataTransfer.files[0];
+			if (file && file.type.startsWith('image/')) {
+				const reader = new FileReader();
+				reader.onload = function (event) {
+					const imgPreview = document.getElementById('imagePreview');
+					imgPreview.src = event.target.result;
+					
+				}
+				reader.readAsDataURL(file);
+			} else {
+				alert('Please drop an image file.');
+			}
+		}
+
+		function showImage() {
+			const imgPreview = document.getElementById('imagePreview');
+			if (imgPreview.src != '#') {
+				alert('Image uploaded successfully!');
+			} else {
+				alert('Please upload an image first.');
+			}
+		}
+	</script>
+</body>
+
+</html>

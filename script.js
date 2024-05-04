@@ -22,6 +22,7 @@ function changeTimeDate() {
     
     currentDate = Dates.getDate();
     currentMouth = Dates.getMonth();
+    currentMouth = currentMouth + 1
     currentYear = Dates.getFullYear();
     currentMinute = Dates.getMinutes();
     currentHour = Dates.getHours();
@@ -48,10 +49,24 @@ function changeTimeDate() {
     time.innerHTML = currentHour + ':' + currentMinute + amPm;
     date.innerHTML = currentDate + '-' + currentMouth + '-' + currentYear;
 }
-changeTimeDate();
 
-navigator.getBattery().then(function(battery) {
-    let batteryBox = document.querySelector('.battery-box');
-    let batteryLevel = battery.level * 100;
-    batteryBox.append(batteryLevel + '%');
-  });
+let batteryBox = document.querySelector('.battery-box');
+let batteryLevelBox = document.createElement("div");
+batteryLevelBox.classList.add('battery-level-box');
+batteryBox.appendChild(batteryLevelBox);
+function batteryLevel() {
+    navigator.getBattery().then(function(battery) {
+        let batteryLevel = battery.level * 100;
+        // batteryLevelBox.textContent = parseInt(batteryLevel) + '%';
+        batteryLevelBox.textContent = batteryLevel + '%';
+    });
+}
+
+function refreshMainWindowComponents() {
+    changeTimeDate();
+    batteryLevel();
+}
+
+changeTimeDate();
+batteryLevel();
+setInterval(refreshMainWindowComponents, 60000)

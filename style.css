@@ -20,6 +20,7 @@
 .wallpaper {
     width: 100%;
     height: 100vh;
+    padding: 0.5px;
     background-image: url('https://cdn.wallpaperhub.app/cloudcache/f/0/3/f/8/a/f03f8a91e5396f8bb7cebaf7410d9a619e14ed7f.jpg');
     background-repeat: no-repeat;
     background-size: cover;

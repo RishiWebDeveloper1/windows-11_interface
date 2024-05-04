@@ -99,6 +99,7 @@ function createApplication(text, url) {
 
         appName.textContent = text;
         ifarme.src = url;
+        ifarme.style.border = '0';
 
         applicationLayoutManager();
     }

@@ -19,6 +19,9 @@
             </div>
             <div class="search-box">
                 <input type="text" id="searchInput" placeholder="Search...">
+                <div class="search-button" onclick="serachQuery()">
+                    <img src="images/search_button_icon.png" alt="" class="search-button-icon">
+                </div>
             </div>
         </div>
         <div class="video-feed">
@@ -33,7 +36,7 @@
     const searchInput = document.getElementById('searchInput');
     const searchResults = document.getElementById('searchResultsBox');
 
-    searchInput.addEventListener('input', function () {
+    function serachQuery() {
         const searchTerm = searchInput.value.trim();
         if (searchTerm.length > 0) {
             // Call a function to fetch search results using YouTube Data API
@@ -41,7 +44,7 @@
         } else {
             searchResults.innerHTML = ''; // Clear search results if search term is empty
         }
-    });
+    }
 
     function fetchSearchResults(searchTerm) {
         const apiKey = 'AIzaSyCkzOqQxFUSEBsN7pO_W797gQCZJ9_haM4';

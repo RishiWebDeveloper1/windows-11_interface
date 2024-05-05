@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube</title>
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+            list-style: none;
+            text-decoration: none;
+            box-sizing: border-box;
+            user-select: none;
+            font-family: 'Segoe UI';
+            font-weight: 100;
+        }
+
+        .container {
+            width: 100%;
+            height: 100dvh;
+            color: white;
+            background-color: rgb(22, 22, 22);
+            display: flex;
+            flex-direction: column;
+            align-items: center
+        }
+
+        .video-play-box {
+            width: 90%;
+            height: 400px;
+            margin-top: 30px;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+        }
+
+        .title-box {
+            width: 90%;
+            margin-top: 20px;
+            height: auto;
+            font-size: 20px;
+            font-weight: bolder;
+        }
+
+        .discription-box {
+            width: 90%;
+            height: 118px;
+            padding: 15px;
+            margin-top: 20px;
+            background-color: rgb(74, 73, 73);
+            border-radius: 10px;
+        }
+        
+        .discription-box::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .discription {
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- https://www.youtube.com/embed/tgbNymZ7vqY?autoplay=1&mute=1 -->
+    <div class="container">
+        <div class="video-play-box">
+            <iframe src="https://www.youtube.com/embed/DusI3yKpkJc" allow="autoplay" frameborder="0"></iframe>
+        </div>
+        <div class="title-box">
+            No Title Avalible!!!
+        </div>
+        <div class="discription-box">
+            <div class="discription">
+                The Discription is not avalible for this channel.!!!
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let iframe = document.querySelector('iframe');
+        let title = document.querySelector('.title-box');
+        let discription = document.querySelector('.discription-box');
+
+        let getTitle = localStorage.getItem('title-youtube');
+        let getUrl = localStorage.getItem('url-youtube');
+        let getDiscription = localStorage.getItem('discription-youtube');
+
+        iframe.src = `https://www.youtube.com/embed/${getUrl}?autoplay=1`;
+        title.textContent = getTitle;
+        discription.textContent = getDiscription;
+    </script>
+</body>
+
+</html>

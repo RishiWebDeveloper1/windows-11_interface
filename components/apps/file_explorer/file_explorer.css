@@ -100,7 +100,7 @@
 }
 
 .image-preview-box {
-    width: 100%;
+    width: 100dvw;
     height: calc(100% - 60px);
     background-color: black;
     box-shadow: 0 0 0 0.5px white;
@@ -228,6 +228,11 @@
     width: calc(200px - 30px);
     padding-left: 5px;
     font-size: 13px;
+    overflow-x: auto;
+}
+
+.folder-detail-name-box::-webkit-scrollbar {
+    display: none;
 }
 
 .date-modified-box {

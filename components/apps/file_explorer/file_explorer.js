@@ -66,7 +66,7 @@ function loadImageList() {
                 
                 const sizeBox = document.createElement('div');
                 sizeBox.classList.add('size-box');
-                sizeBox.textContent = '10GB';
+                sizeBox.textContent = '100GB';
                 
                 folderDetailIconBox.appendChild(folderIcon);
                 folderDetailBox.appendChild(folderDetailIconBox);
@@ -89,11 +89,11 @@ function showImage(imageName) {
     setTimeout(() => {
         if (imagePreview.naturalWidth > imagePreview.naturalHeight) {
             console.log('width is greater')
-            imagePreview.style.width = '100%';
+            imagePreview.style.width = '90%';
         }
         else {
             console.log('height is greater')
-            imagePreview.style.height = '100%';
+            imagePreview.style.height = '90%';
         }        
     }, 500);
 }

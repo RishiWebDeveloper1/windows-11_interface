@@ -5,7 +5,7 @@
     text-decoration: none;
     box-sizing: border-box;
     user-select: none;
-    font-family:'Segoe UI';
+    font-family: 'Segoe UI';
     font-weight: 100;
 }
 
@@ -54,7 +54,7 @@
     border: 0px;
     font-size: 15px;
     font-family: monospace;
-    overflow-x:hidden;
+    overflow-x: hidden;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -78,14 +78,56 @@
     color: rgb(220, 220, 220);
 }
 
+.file-upload-box {
+    width: 100%;
+    height: 30px;
+    padding-left: 5px;
+    color: white;
+    background-color: rgb(30, 29, 29);
+    box-shadow: 0 0 0 1px gray;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
 .file-system {
     width: 100%;
-    height: calc(100vh - 55px);
+    height: calc(100vh - 85px);
     color: white;
     background-color: rgb(30, 29, 29);
     box-shadow: 0 0 0 1px gray;
     display: flex;
 }
+
+.image-preview-box {
+    width: 100%;
+    height: calc(100% - 60px);
+    background-color: black;
+    box-shadow: 0 0 0 0.5px white;
+    position: fixed;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    overflow: auto;
+}
+
+.close {
+    width: 100%;
+    height: 17px;
+    background-color: black;
+    box-shadow: 0 0 0 0.5px white;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.close-icon {
+    width: 15px;
+}
+
+/* #imagePreview {
+
+} */
 
 .folder-navigation-box {
     width: 10%;
@@ -128,30 +170,6 @@
     width: calc(100% - 35px);
     font-size: 13px;
     box-sizing: content-box;
-}
-
-#dropArea {
-    border: 2px dashed #ccc;
-    margin: 20px;
-    padding: 20px;
-    text-align: center;
-    cursor: pointer;
-}
-
-#imagePreview {
-    margin-top: 20px;
-    max-width: 300px;
-    max-height: 300px;
-}
-
-#showButton {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #3f88f8;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
 }
 
 .folder-content-box {

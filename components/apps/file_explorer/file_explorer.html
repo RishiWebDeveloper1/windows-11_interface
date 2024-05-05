@@ -5,7 +5,9 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>File Explorer</title>
-	<link rel="shortcut icon" href="https://winaero.com/blog/wp-content/uploads/2018/12/file-explorer-folder-libraries-icon-18298.png" type="image/x-icon">
+	<link rel="shortcut icon"
+		href="https://winaero.com/blog/wp-content/uploads/2018/12/file-explorer-folder-libraries-icon-18298.png"
+		type="image/x-icon">
 	<link rel="stylesheet" href="file_explorer.css">
 </head>
 
@@ -25,11 +27,22 @@
 				<input type="text" class="search-bar" placeholder="Search">
 			</div>
 		</div>
+		<div class="file-upload-box">
+			<input type="file" id="imageInput" accept="image/*">
+		</div>
 		<div class="file-system">
+			<div class="image-preview-box">
+				<div class="close">
+					<img src="https://static-00.iconduck.com/assets.00/cross-icon-2048x2048-vz9m0pj3.png" alt=""
+						class="close-icon" onclick="closeImage()">
+				</div>
+				<img id="imagePreview" src="#">
+			</div>
 			<div class="folder-navigation-box">
 				<div class="folder-mini-box">
 					<div class="folder-icon-box">
-						<img src="https://winaero.com/blog/wp-content/uploads/2018/12/file-explorer-folder-libraries-icon-18298.png" alt="" class="folder-icon">
+						<img src="https://winaero.com/blog/wp-content/uploads/2018/12/file-explorer-folder-libraries-icon-18298.png"
+							alt="" class="folder-icon">
 					</div>
 					<div class="folder-name-box">
 						Home
@@ -37,7 +50,8 @@
 				</div>
 				<div class="folder-mini-box">
 					<div class="folder-icon-box">
-						<img src="https://winaero.com/blog/wp-content/uploads/2018/12/file-explorer-folder-libraries-icon-18298.png" alt="" class="folder-icon">
+						<img src="https://winaero.com/blog/wp-content/uploads/2018/12/file-explorer-folder-libraries-icon-18298.png"
+							alt="" class="folder-icon">
 					</div>
 					<div class="folder-name-box">
 						Photos
@@ -45,7 +59,8 @@
 				</div>
 				<div class="folder-mini-box">
 					<div class="folder-icon-box">
-						<img src="https://winaero.com/blog/wp-content/uploads/2018/12/file-explorer-folder-libraries-icon-18298.png" alt="" class="folder-icon">
+						<img src="https://winaero.com/blog/wp-content/uploads/2018/12/file-explorer-folder-libraries-icon-18298.png"
+							alt="" class="folder-icon">
 					</div>
 					<div class="folder-name-box">
 						Videos
@@ -53,7 +68,8 @@
 				</div>
 				<div class="folder-mini-box">
 					<div class="folder-icon-box">
-						<img src="https://winaero.com/blog/wp-content/uploads/2018/12/file-explorer-folder-libraries-icon-18298.png" alt="" class="folder-icon">
+						<img src="https://winaero.com/blog/wp-content/uploads/2018/12/file-explorer-folder-libraries-icon-18298.png"
+							alt="" class="folder-icon">
 					</div>
 					<div class="folder-name-box">
 						Document
@@ -61,16 +77,11 @@
 				</div>
 				<div class="folder-mini-box">
 					<div class="folder-icon-box">
-						<img src="https://winaero.com/blog/wp-content/uploads/2018/12/file-explorer-folder-libraries-icon-18298.png" alt="" class="folder-icon">
+						<img src="https://winaero.com/blog/wp-content/uploads/2018/12/file-explorer-folder-libraries-icon-18298.png"
+							alt="" class="folder-icon">
 					</div>
 					<div class="folder-name-box">
 						Download
-					</div>
-				</div>
-				<div class="upload-file-box">
-					<div id="dropArea" ondragover="handleDragOver(event)" ondrop="handleFileDrop(event)">
-						<p>Drag & Drop Images Here</p>
-						<input type="file" id="fileInput" accept="image/*" style="display: none;">
 					</div>
 				</div>
 			</div>
@@ -91,7 +102,8 @@
 				</div>
 				<div class="folder-detail-box">
 					<div class="folder-detail-icon-box">
-						<img src="https://winaero.com/blog/wp-content/uploads/2018/12/file-explorer-folder-libraries-icon-18298.png" alt="" class="folder-icon">
+						<img src="https://winaero.com/blog/wp-content/uploads/2018/12/file-explorer-folder-libraries-icon-18298.png"
+							alt="" class="folder-icon">
 					</div>
 					<div class="folder-detail-box">
 						<div class="folder-detail-name-box">
@@ -110,7 +122,8 @@
 				</div>
 				<div class="folder-detail-box">
 					<div class="folder-detail-icon-box">
-						<img src="https://winaero.com/blog/wp-content/uploads/2018/12/file-explorer-folder-libraries-icon-18298.png" alt="" class="folder-icon">
+						<img src="https://winaero.com/blog/wp-content/uploads/2018/12/file-explorer-folder-libraries-icon-18298.png"
+							alt="" class="folder-icon">
 					</div>
 					<div class="folder-detail-box">
 						<div class="folder-detail-name-box">
@@ -129,7 +142,8 @@
 				</div>
 				<div class="folder-detail-box">
 					<div class="folder-detail-icon-box">
-						<img src="https://winaero.com/blog/wp-content/uploads/2018/12/file-explorer-folder-libraries-icon-18298.png" alt="" class="folder-icon">
+						<img src="https://winaero.com/blog/wp-content/uploads/2018/12/file-explorer-folder-libraries-icon-18298.png"
+							alt="" class="folder-icon">
 					</div>
 					<div class="folder-detail-box">
 						<div class="folder-detail-name-box">
@@ -148,7 +162,8 @@
 				</div>
 				<div class="folder-detail-box">
 					<div class="folder-detail-icon-box">
-						<img src="https://winaero.com/blog/wp-content/uploads/2018/12/file-explorer-folder-libraries-icon-18298.png" alt="" class="folder-icon">
+						<img src="https://winaero.com/blog/wp-content/uploads/2018/12/file-explorer-folder-libraries-icon-18298.png"
+							alt="" class="folder-icon">
 					</div>
 					<div class="folder-detail-box">
 						<div class="folder-detail-name-box">
@@ -164,6 +179,9 @@
 							10GB
 						</div>
 					</div>
+				</div>
+				<div class="loaded-file-box">
+
 				</div>
 			</div>
 		</div>

@@ -64,28 +64,12 @@
 
 
 	<script>
-		function getAllLocalStorage() {
-			const storage = window.localStorage;
-			const keys = Object.keys(storage);
-			const values = [];
-
-			for (const key of keys) {
-				values.push(storage.getItem(key));
-			}
-
-			return values;
-		}
-
-		const allLocalStorage = getAllLocalStorage();
-
-		console.log(allLocalStorage);
-
 		const imageInput = document.getElementById('imageInput');
 		const uploadButton = document.getElementById('uploadButton');
 		const showButton = document.getElementById('showButton');
 		const imagePreview = document.getElementById('imagePreview');
 
-		uploadButton.addEventListener('click',
+		imageInput.addEventListener('change',
 
 			function () {
 				const file = imageInput.files[0];
@@ -102,10 +86,6 @@
 			}
 		);
 
-		function saveImage(imageData) {
-			localStorage.setItem(imageName, imageData);
-		}
-
 		function loadImageList() {
 			let allImage = document.querySelector('.all-images');
 			allImage.innerHTML = '';
@@ -117,7 +97,7 @@
 
 				for (let i of imageCheck) {
 					let index = getImageName.indexOf(i);
-
+					
 					if (index !== -1) {
 						// console.log('in if')
 						let image = document.createElement('div');
@@ -132,20 +112,36 @@
 				}
 			}
 		}
-
+		
 		function showImage(imageName) {
 			let getImage = localStorage.getItem(imageName);
 			imagePreview.src = getImage;
 		}
-
+		
 		showButton.addEventListener('click', () => {
 			const file = imageInput.files[0];
 			let getImage = localStorage.getItem(file.name);
 			imagePreview.src = getImage;
 		})
-
+		
+		function getAllLocalStorage() {
+			const storage = window.localStorage;
+			const keys = Object.keys(storage);
+			const values = [];
+		
+			for (const key of keys) {
+				values.push(storage.getItem(key));
+			}
+		
+			return values;
+		}
+		
+		const allLocalStorage = getAllLocalStorage();
+		
+		console.log(allLocalStorage);
+		
 		loadImageList();
-	</script>
+		</script>
 
 </body>
 

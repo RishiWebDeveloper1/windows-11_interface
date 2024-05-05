@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>File Explorer</title>
+	<link rel="shortcut icon" href="https://winaero.com/blog/wp-content/uploads/2018/12/file-explorer-folder-libraries-icon-18298.png" type="image/x-icon">
+	<link rel="stylesheet" href="file_explorer.css">
+</head>
+
+<body>
+	<div class="megacontainer">
+		<div class="tool-bar-box">
+			<div class="button-box">
+				<img src="images/arrow-icon.png" alt="back" class="button-icon" id="backButton">
+			</div>
+			<div class="button-box">
+				<img src="images/arrow-icon.png" alt="forward" class="button-icon" id="forwardButton">
+			</div>
+			<div class="path-box">
+				<input type="text" class="path-show" value="D:\coding\development\Projects\windows-11_interface">
+			</div>
+			<div class="search-box">
+				<input type="text" class="search-bar" placeholder="Search">
+			</div>
+		</div>
+		<div class="file-system">
+			<div class="folder-navigation-box">
+				<div class="folder-mini-box">
+					<div class="folder-icon-box">
+						<img src="https://winaero.com/blog/wp-content/uploads/2018/12/file-explorer-folder-libraries-icon-18298.png" alt="" class="folder-icon">
+					</div>
+					<div class="folder-name-box">
+						Home
+					</div>
+				</div>
+				<div class="folder-mini-box">
+					<div class="folder-icon-box">
+						<img src="https://winaero.com/blog/wp-content/uploads/2018/12/file-explorer-folder-libraries-icon-18298.png" alt="" class="folder-icon">
+					</div>
+					<div class="folder-name-box">
+						Photos
+					</div>
+				</div>
+				<div class="folder-mini-box">
+					<div class="folder-icon-box">
+						<img src="https://winaero.com/blog/wp-content/uploads/2018/12/file-explorer-folder-libraries-icon-18298.png" alt="" class="folder-icon">
+					</div>
+					<div class="folder-name-box">
+						Videos
+					</div>
+				</div>
+				<div class="folder-mini-box">
+					<div class="folder-icon-box">
+						<img src="https://winaero.com/blog/wp-content/uploads/2018/12/file-explorer-folder-libraries-icon-18298.png" alt="" class="folder-icon">
+					</div>
+					<div class="folder-name-box">
+						Document
+					</div>
+				</div>
+				<div class="folder-mini-box">
+					<div class="folder-icon-box">
+						<img src="https://winaero.com/blog/wp-content/uploads/2018/12/file-explorer-folder-libraries-icon-18298.png" alt="" class="folder-icon">
+					</div>
+					<div class="folder-name-box">
+						Download
+					</div>
+				</div>
+				<div class="upload-file-box">
+					<div id="dropArea" ondragover="handleDragOver(event)" ondrop="handleFileDrop(event)">
+						<p>Drag & Drop Images Here</p>
+						<input type="file" id="fileInput" accept="image/*" style="display: none;">
+					</div>
+				</div>
+			</div>
+			<div class="folder-content-box">
+				<div class="label-bar-box">
+					<div class="label-name-box" style="width: 200px;">
+						Name
+					</div>
+					<div class="label-name-box" style="width: 150px;">
+						Date modified
+					</div>
+					<div class="label-name-box" style="width: 150px;">
+						Type
+					</div>
+					<div class="label-name-box" style="width: 100px;">
+						Size
+					</div>
+				</div>
+				<div class="folder-detail-box">
+					<div class="folder-detail-icon-box">
+						<img src="https://winaero.com/blog/wp-content/uploads/2018/12/file-explorer-folder-libraries-icon-18298.png" alt="" class="folder-icon">
+					</div>
+					<div class="folder-detail-box">
+						<div class="folder-detail-name-box">
+							Python
+						</div>
+						<div class="date-modified-box">
+							04-05-2024 06:08 PM
+						</div>
+						<div class="type-box">
+							File Folder
+						</div>
+						<div class="size-box">
+							10GB
+						</div>
+					</div>
+				</div>
+				<div class="folder-detail-box">
+					<div class="folder-detail-icon-box">
+						<img src="https://winaero.com/blog/wp-content/uploads/2018/12/file-explorer-folder-libraries-icon-18298.png" alt="" class="folder-icon">
+					</div>
+					<div class="folder-detail-box">
+						<div class="folder-detail-name-box">
+							code-box
+						</div>
+						<div class="date-modified-box">
+							04-05-2024 06:08 PM
+						</div>
+						<div class="type-box">
+							File Folder
+						</div>
+						<div class="size-box">
+							10GB
+						</div>
+					</div>
+				</div>
+				<div class="folder-detail-box">
+					<div class="folder-detail-icon-box">
+						<img src="https://winaero.com/blog/wp-content/uploads/2018/12/file-explorer-folder-libraries-icon-18298.png" alt="" class="folder-icon">
+					</div>
+					<div class="folder-detail-box">
+						<div class="folder-detail-name-box">
+							Movies
+						</div>
+						<div class="date-modified-box">
+							04-05-2024 06:08 PM
+						</div>
+						<div class="type-box">
+							File Folder
+						</div>
+						<div class="size-box">
+							10GB
+						</div>
+					</div>
+				</div>
+				<div class="folder-detail-box">
+					<div class="folder-detail-icon-box">
+						<img src="https://winaero.com/blog/wp-content/uploads/2018/12/file-explorer-folder-libraries-icon-18298.png" alt="" class="folder-icon">
+					</div>
+					<div class="folder-detail-box">
+						<div class="folder-detail-name-box">
+							Music
+						</div>
+						<div class="date-modified-box">
+							04-05-2024 06:08 PM
+						</div>
+						<div class="type-box">
+							File Folder
+						</div>
+						<div class="size-box">
+							10GB
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="file_explorer.js"></script>
+</body>
+
+</html>

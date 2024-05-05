@@ -77,8 +77,8 @@ function createApplication(text, url) {
         appPage.classList.add('app-page');
         ifarme.classList.add('iframe');
 
-        minimizeIcon.src = '../images/minimize_icon.png';
-        maximizeIcon.src = '../images/maximize_icon.png';
+        minimizeIcon.src = 'images/minimize_icon.png';
+        maximizeIcon.src = 'images/maximize_icon.png';
         closeIcon.src = 'https://static-00.iconduck.com/assets.00/cross-icon-2048x2048-vz9m0pj3.png';
 
         noOfApplicatons = noOfApplicatons + 1;

@@ -19,7 +19,7 @@ function openFullscreen() {
 
 function changeTimeDate() {
     let Dates = new Date();
-    
+
     currentDate = Dates.getDate();
     currentMouth = Dates.getMonth();
     currentMouth = currentMouth + 1
@@ -32,7 +32,7 @@ function changeTimeDate() {
         currentHour = currentHour - 12;
         amPm = ' PM'
     }
-    
+
     if (currentDate <= 9) {
         currentDate = '0' + currentDate;
     }
@@ -45,7 +45,7 @@ function changeTimeDate() {
     if (currentMinute <= 9) {
         currentMinute = '0' + currentMinute;
     }
-    
+
     time.innerHTML = currentHour + ':' + currentMinute + amPm;
     date.innerHTML = currentDate + '-' + currentMouth + '-' + currentYear;
 }
@@ -55,7 +55,7 @@ let batteryLevelBox = document.createElement("div");
 batteryLevelBox.classList.add('battery-level-box');
 batteryBox.appendChild(batteryLevelBox);
 function batteryLevel() {
-    navigator.getBattery().then(function(battery) {
+    navigator.getBattery().then(function (battery) {
         let batteryLevel = battery.level * 100;
         // batteryLevelBox.textContent = parseInt(batteryLevel) + '%';
         batteryLevelBox.textContent = batteryLevel + '%';
@@ -70,3 +70,80 @@ function refreshMainWindowComponents() {
 changeTimeDate();
 batteryLevel();
 setInterval(refreshMainWindowComponents, 60000)
+
+let startButtonCheck = true;
+function windowStartButton() {
+    console.log(startButtonCheck)
+    let wallpaper = document.querySelector('.wallpaper');
+    let applicationBox = document.getElementById('applicationBox');
+    let startMenuBox = document.createElement('div');
+    startMenuBox.classList.add('start-menu-box');
+
+    if (startButtonCheck == true) {
+        startMenuBox.innerHTML = `
+        <div class="start-menu-search-bar-box">
+            <input type="text" class="start-menu-search-bar" placeholder="Search for apps">
+        </div>
+        <div class="start-menu-button-box">
+            <div class="start-menu-pinned-label">
+                Pinned
+            </div>
+            <div class="start-menu-all-app-button">
+                All apps
+            </div>
+        </div>
+        <div class="all-apps-box">
+            <div class="start-menu-app-box">
+                <img src="https://winaero.com/blog/wp-content/uploads/2018/12/file-explorer-folder-libraries-icon-18298.png" alt="" class="start-menu-app-icon">
+                <div class="start-menu-app-name">
+                    File Explorer
+                </div>
+            </div>
+            <div class="start-menu-app-box">
+                <img src="https://winaero.com/blog/wp-content/uploads/2018/12/file-explorer-folder-libraries-icon-18298.png" alt="" class="start-menu-app-icon">
+                <div class="start-menu-app-name">
+                    File Explorer
+                </div>
+            </div>
+            <div class="start-menu-app-box">
+                <img src="https://winaero.com/blog/wp-content/uploads/2018/12/file-explorer-folder-libraries-icon-18298.png" alt="" class="start-menu-app-icon">
+                <div class="start-menu-app-name">
+                    File Explorer
+                </div>
+            </div>
+            <div class="start-menu-app-box">
+                <img src="https://winaero.com/blog/wp-content/uploads/2018/12/file-explorer-folder-libraries-icon-18298.png" alt="" class="start-menu-app-icon">
+                <div class="start-menu-app-name">
+                    File Explorer
+                </div>
+            </div>
+            <div class="start-menu-app-box">
+                <img src="https://winaero.com/blog/wp-content/uploads/2018/12/file-explorer-folder-libraries-icon-18298.png" alt="" class="start-menu-app-icon">
+                <div class="start-menu-app-name">
+                    File Explorer
+                </div>
+            </div>
+            <div class="start-menu-app-box">
+                <img src="https://winaero.com/blog/wp-content/uploads/2018/12/file-explorer-folder-libraries-icon-18298.png" alt="" class="start-menu-app-icon">
+                <div class="start-menu-app-name">
+                    File Explorer
+                </div>
+            </div>
+            <div class="start-menu-app-box">
+                <img src="https://winaero.com/blog/wp-content/uploads/2018/12/file-explorer-folder-libraries-icon-18298.png" alt="" class="start-menu-app-icon">
+                <div class="start-menu-app-name">
+                    File Explorer
+                </div>
+            </div>
+        </div>
+        `;
+        wallpaper.insertBefore(startMenuBox, applicationBox);
+        startButtonCheck = false;
+    }
+    else {
+        let startMenuBox = document.querySelector('.start-menu-box')
+        startMenuBox.remove()
+        startButtonCheck = true;
+    }
+
+}

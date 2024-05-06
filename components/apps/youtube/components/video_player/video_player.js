@@ -11,6 +11,7 @@ iframe.src = `https://www.youtube.com/embed/${getUrl}?autoplay=1`;
 title.textContent = getTitle;
 discription.textContent = getDiscription;
 
+const apiKey = 'AIzaSyCkzOqQxFUSEBsN7pO_W797gQCZJ9_haM4';
 const channelUrl = `https://www.googleapis.com/youtube/v3/channels?part=snippet&id=${getChannelId}&key=${apiKey}`;
 const statisticsUrl = `https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${getChannelId}&key=${apiKey}`;
 

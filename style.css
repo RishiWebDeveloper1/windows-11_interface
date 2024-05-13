@@ -148,7 +148,8 @@
 }
 
 .hidden-icons-icon {
-    width: 20px;
+    width: 35px;
+    height: 35px;
 }
 
 .language-box {
@@ -182,7 +183,7 @@
 }
 
 .wifi-box {
-    width: 18px;
+    width: 15px;
     height: 15px;
     display: flex;
     justify-content: center;
@@ -250,7 +251,7 @@
 }
 
 .notification-icon {
-    width: 22px;
+    width: 20px;
     height: 20px;
 }
 

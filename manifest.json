@@ -1,0 +1,11 @@
+{
+    "name": "Virtual Windows 11",
+    "short_name": "VirtualWindows11",
+    "description": "Experience Windows 11 in your browser!",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "background_color": "#FF0000",
+    "theme_color": "#008000",
+    "orientation": "portrait_primary"
+  }
+  

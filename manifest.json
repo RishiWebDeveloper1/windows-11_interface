@@ -3,9 +3,9 @@
     "short_name": "VirtualWindows11",
     "description": "Experience Windows 11 in your browser!",
     "start_url": "/index.html",
-    "display": "standalone",
-    "background_color": "#FF0000",
-    "theme_color": "#008000",
-    "orientation": "portrait_primary"
+    "display": "fullscreen",
+    "background_color": "rgb(0, 145, 255)",
+    "theme_color": "rgb(0, 145, 255)",
+    "orientation": "landscape_primary"
   }
   

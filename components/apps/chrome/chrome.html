@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chrome</title>
+    <link rel="shortcut icon" href="https://cdn1.iconfinder.com/data/icons/google_jfk_icons_by_carlosjj/512/chrome.png" type="image/x-icon">
+    <link rel="stylesheet" href="chrome.css">
+</head>
+
+<body>
+    <div class="megacontainer">
+        <div class="tool-bar-box">
+            <div class="back-button-box button-box" onclick="backButtonCommand()">
+                <img src="https://cdn-icons-png.flaticon.com/512/109/109618.png" alt=""
+                    class="back-button-icon button-icon">
+            </div>
+            <div class="refresh-button-box button-box" onclick="refreshButtonCommand()">
+                <img src="https://cdn.icon-icons.com/icons2/38/PNG/512/refresh_arrow_4502.png" alt=""
+                    class="refresh-button-icon button-icon">
+            </div>
+            <div class="search-bar-box">
+                <input type="text" class="search-bar">
+                <div class="search-button-box button-box" onclick="searchCommand()">
+                    <img src="https://static-00.iconduck.com/assets.00/search-icon-2048x2048-4r9dtbbw.png" alt=""
+                        class="search-button-icon button-icon">
+                </div>
+            </div>
+        </div>
+        <div class="iframe-box">
+            <iframe src="https://www.google.com/search?igu=1" frameborder="0"></iframe>
+        </div>        
+    </div>
+</body>
+<script src="chrome.js"></script>
+
+</html>

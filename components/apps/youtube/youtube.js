@@ -4,8 +4,8 @@ const searchResults = document.getElementById('searchResultsBox');
 function serachQuery() {
     const searchTerm = searchInput.value.trim();
     if (searchTerm.length > 0) {
-        // Call a function to fetch search results using YouTube Data API
-        fetchSearchResults(searchTerm);
+        fetchVideos('previousClear');
+        // storeQuery(searchTerm);
         searchInput.style.border = '0.1px solid rgb(81, 81, 81)';
     } else {
         searchInput.style.border = '0.1px solid red';
@@ -76,6 +76,14 @@ function storeDataToLocal(title, videoId, discription, channelId) {
     window.location.href = "components/video_player/video_player.html";
 }
 
+function storeQuery(query) {
+    let queryData = localStorage.getItem('queryData');
+    queryData = JSON.parse(queryData);
+    queryData.append(queryData);
+    queryData = JSON.stringify(queryData);
+    localStorage.setItem('queryData', queryData);
+}
+
 // ************************************** DOM load video display ***************************************************************
 
 // const apiKey = 'AIzaSyCkzOqQxFUSEBsN7pO_W797gQCZJ9_haM4'; // my own key
@@ -91,10 +99,7 @@ const maxResults = 10;
 function formatDuration(isoDuration) {
     const match = isoDuration.match(/PT(\d+H)?(\d+M)?(\d+S)?/);
 
-    console.log(isoDuration);
-    console.log(match == null);
     if (match == null) {
-        console.log("match is null");
         return "Live";
     }
     else {
@@ -116,16 +121,17 @@ const channels = [
     'UCttspZesZIDEwwpVIgoZtWQ'  // India TV
 ];
 
-const movieQueries = ['Latest Bhojpuri Movies', 'New Bhojpuri Movies', 'Top Bhojpuri Movies'];
-const newsQueries = ['Latest News', 'Breaking News', 'Top News', 'Recent News', 'hindi news', 'yesterday news'];
+const movieQueries = ['Latest Bhojpuri Movies', 'New Bhojpuri Movies'];
+const newsQueries = ['Latest News hindi', 'Breaking News hindi', 'Recent News hindi', 'hindi news', 'yesterday news hindi'];
 
 function getRandomElement(arr) {
+    console.log(arr[Math.floor(Math.random() * arr.length)]);
     return arr[Math.floor(Math.random() * arr.length)];
 }
 
 function getRandomTimestamp() {
     const now = new Date();
-    const randomOffset = Math.floor(Math.random() * 30); // Random offset within the last 30 days
+    const randomOffset = Math.floor(Math.random() * 3); // Random offset within the last 3 days
     const randomDate = new Date(now.setDate(now.getDate() - randomOffset));
     return randomDate.toISOString();
 }
@@ -137,32 +143,33 @@ function getRandomQuery() {
 
     const queryOptions = [
         `channelId=${randomChannel}&order=date&publishedAfter=${getRandomTimestamp()}`,
-        `q=${encodeURIComponent(randomMovieQuery)}&order=viewCount&publishedAfter=${getRandomTimestamp()}`,
-        `q=${encodeURIComponent(randomNewsQuery)}&order=date&publishedAfter=${getRandomTimestamp()}`
+        `q=${randomMovieQuery}&order=viewCount&publishedAfter=${getRandomTimestamp()}`,
+        `q=${randomNewsQuery}&order=date&publishedAfter=${getRandomTimestamp()}`
     ];
 
     return getRandomElement(queryOptions);
 }
 
 
-function fetchVideos() {
+function fetchVideos(previousClear) {
+    let url = '';
     let randomQuery = '';
     const searchTerm = searchInput.value.trim();
     if (searchTerm.length > 0) {
-        randomQuery = searchTerm;
-        console.log("Show More is Work!!!  " + randomQuery);
+        if (previousClear == 'previousClear') {
+            searchResults.innerHTML = '';
+        }
+        
+        url = `https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&key=${apiKey}&maxResults=${maxResults}&part=snippet&type=video`;
     } else {
         randomQuery = getRandomQuery();
-        console.log("Show More Not Work!!!  " + randomQuery);
+        url = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&part=snippet&${randomQuery}&type=video&maxResults=${maxResults}`;
     }
-    const url = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&part=snippet&${randomQuery}&type=video&maxResults=${maxResults}`;
-
 
     fetch(url)
         .then(response => response.json())
         .then(data => {
             const videoIds = data.items.map(item => item.id.videoId).join(',');
-            console.log(videoIds)
             fetchVideoDetails(videoIds);
         })
         .catch(error => console.error('Error fetching videos:', error));
@@ -174,25 +181,20 @@ function fetchVideoDetails(videoIds) {
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            console.log(data)
             displayVideos(data.items);
         })
 }
 
 function displayVideos(videos) {
 
-    console.log(videos)
     videos.forEach(video => {
-        console.log("videos")
         // console.log(video)
         const title = discriptionRepair(video.snippet.title);
         const videoId = video.id;
-        console.log("videosid " + video.id.videoId);
         const thumbnailUrl = video.snippet.thumbnails.high.url;
         let discription = discriptionRepair(video.snippet.description);
         const channelId = video.snippet.channelId;
         let duration = formatDuration(video.contentDetails.duration);
-        console.log(duration);
 
         const resultItem = document.createElement('div');
         resultItem.classList.add('search-result');
@@ -221,7 +223,18 @@ function discriptionRepair(text) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    searchResults.innerHTML = '';
+    console.log("outside the if");
     fetchVideos();
     let showMore = document.querySelector('.show_more');
     showMore.addEventListener('click', fetchVideos);
+    
+    setTimeout(() => {
+        console.log(searchResults.innerHTML == '');
+        // console.log(searchResults.innerHTML);
+        if (searchResults.innerHTML == '') {
+            console.log("inside the if");
+            fetchVideos();
+        }
+    }, 1000);
 });

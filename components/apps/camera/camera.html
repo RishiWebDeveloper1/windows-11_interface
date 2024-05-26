@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camera</title>
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+            list-style: none;
+            text-decoration: none;
+            box-sizing: border-box;
+            user-select: none;
+            font-family: 'Segoe UI';
+        }
+
+        .container {
+            width: 100%;
+            height: 100dvh;
+            background-color: rgb(34, 34, 34);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .setting-tool-box {
+            width: 50px;
+            height: 100%;
+            /* background-color: red; */
+        }
+
+        .camera-box {
+            width: calc(100% - 160px);
+            height: calc(100% - 100px);
+            /* background-color: rgb(0, 200, 255); */
+            border-radius: 20px;
+            overflow: hidden;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        #video {
+            width: calc(100% - 10px);
+            /* max-height: calc(100dvh - 200px); */
+            border-radius: 20px;
+            -webkit-transform: scaleX(-1);
+            transform: scaleX(-1);
+            /* aspect-ratio: 16 / 9; */
+        }
+
+        .button-tool-box {
+            width: 100px;
+            height: 100%;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .button-box {
+            width: 40px;
+            height: 40px;
+            margin: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .button-box:hover {
+            background-color: rgb(51, 54, 58);
+        }
+
+        .button-icon {
+            width: 25px;
+            height: 25px;
+        }
+
+        #active {
+            width: 70px;
+            height: 70px;
+            background-color: white;
+            box-shadow: 0 0 0 2px white;
+            border: 2px solid black;
+            border-radius: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #active:hover {
+            background-color: rgba(255, 255, 255, 0.765);
+        }
+
+        .slide-down-button-icon {
+            width: 40px;
+            transform: rotate(180deg);
+        }
+
+        .slide-up-button-icon {
+            width: 40px;
+        }
+
+        #captured-photo {
+            width: 60px;
+            height: 60px;
+            border-radius: 5px;
+            border: 1px solid white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="setting-tool-box">
+
+        </div>
+        <div class="camera-box">
+            <video id="video" autoplay></video>
+        </div>
+        <div class="button-tool-box">
+            <div class="slide-up-button-box button-box">
+                <img src="images\up-arrow-tail-less.png" alt="" class="slide-up-button-icon">
+            </div>
+            <div class="video-button-box button-box">
+                <img src="images/video_button_icon_white.png" alt="" class="video-button-icon button-icon">
+            </div>
+            <div class="camera-button-box button-box" id="active">
+                <img src="images/camera_button_icon_black.png" alt="" class="camera-button-icon button-icon">
+            </div>
+            <div class="qr-button-box button-box">
+                <img src="images/qr_button_icon_white.png" alt="" class="qr-button-icon button-icon">
+            </div>
+            <div class="slide-down-button-box button-box">
+                <img src="images\up-arrow-tail-less.png" alt="" class="slide-down-button-icon">
+            </div>
+            <img id="captured-photo" alt="">
+        </div>
+    </div>
+
+    <script>
+
+        const video = document.getElementById('video');
+        const captureButton = document.querySelector('.camera-button-box');
+        const capturedPhoto = document.getElementById('captured-photo');
+        navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } })
+            .then(stream => {
+                video.srcObject = stream;
+            })
+            .catch(err => {
+                console.error('Error accessing the camera:', err);
+            });
+
+        captureButton.addEventListener('click', () => {
+            if (cameraButtonBox.id == 'active') {
+                const canvas = document.createElement('canvas');
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                const context = canvas.getContext('2d');
+                context.translate(canvas.width, 0);
+                context.scale(-1, 1);
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                const imageDataURL = canvas.toDataURL('image/png');
+                capturedPhoto.src = imageDataURL;
+                let num = 1;
+                let fileName = `camera_photo${num}.png`;
+                
+                while (localStorage.getItem(fileName) != null) {
+                    fileName = `camera_photo${num}.png`;
+                    console.log(fileName);
+                    num += 1;
+                    if (num == 100) {
+                        break;
+                    }
+                }
+                localStorage.setItem(fileName, imageDataURL);
+            }
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedPhoto = localStorage.getItem('camera_photo.png');
+            if (savedPhoto) {
+                capturedPhoto.src = savedPhoto;
+            }
+        });
+
+        let vidoeButtonIcon = document.querySelector('.video-button-icon')
+        let videoButtonBox = document.querySelector('.video-button-box')
+        videoButtonBox.addEventListener('click', () => {
+            activeButton('video');
+        })
+        let cameraButtonIcon = document.querySelector('.camera-button-icon')
+        let cameraButtonBox = document.querySelector('.camera-button-box')
+        cameraButtonBox.addEventListener('click', () => {
+            activeButton('camera');
+        })
+        let qrButtonIcon = document.querySelector('.qr-button-icon')
+        let qrButtonBox = document.querySelector('.qr-button-box')
+        qrButtonBox.addEventListener('click', () => {
+            activeButton('qr');
+        })
+
+        function activeButton(buttonName) {
+            console.log('hello active button function is working');
+
+            let ButtonElement = document.querySelector(`.${buttonName}-button-box`);
+            videoButtonBox.id = '';
+            vidoeButtonIcon.src = "images/video_button_icon_white.png";
+            cameraButtonBox.id = '';
+            cameraButtonIcon.src = "images/camera_button_icon_white.png";
+            qrButtonBox.id = '';
+            qrButtonIcon.src = "images/qr_button_icon_white.png";
+            if (ButtonElement.id != "active") {
+                ButtonElement.id = "active";
+                document.querySelector(`.${buttonName}-button-icon`).src = `images/${buttonName}_button_icon_black.png`;
+            }
+        }
+
+        let slideUpButtonBox = document.querySelector('.slide-up-button-box');
+        slideUpButtonBox.addEventListener('click', slideUpButtonArrow);
+        let slideDownButtonBox = document.querySelector('.slide-down-button-box');
+        slideDownButtonBox.addEventListener('click', slideDownButtonArrow);
+        function slideUpButtonArrow() {
+            // videoButtonBox.id = '';
+            // vidoeButtonIcon.src = "images/video_button_icon_white.png";
+            // cameraButtonBox.id = '';
+            // cameraButtonIcon.src = "images/camera_button_icon_white.png";
+            // qrButtonBox.id = '';
+            // qrButtonIcon.src = "images/qr_button_icon_white.png";
+            if (cameraButtonBox.id == 'active') {
+                videoButtonBox.id = 'active';
+                vidoeButtonIcon.src = "images/video_button_icon_black.png";
+
+                cameraButtonBox.id = '';
+                cameraButtonIcon.src = "images/camera_button_icon_white.png";
+                qrButtonBox.id = '';
+                qrButtonIcon.src = "images/qr_button_icon_white.png";
+            }
+            else if (qrButtonBox.id == 'active') {
+                videoButtonBox.id = '';
+                vidoeButtonIcon.src = "images/video_button_icon_white.png";
+                cameraButtonBox.id = '';
+                qrButtonBox.id = '';
+                qrButtonIcon.src = "images/qr_button_icon_white.png";
+
+                cameraButtonBox.id = 'active';
+                cameraButtonIcon.src = "images/camera_button_icon_black.png";
+            }
+        }
+
+        function slideDownButtonArrow() {
+            if (cameraButtonBox.id == 'active') {
+                qrButtonBox.id = 'active';
+                qrButtonIcon.src = "images/qr_button_icon_black.png";
+
+                videoButtonBox.id = '';
+                vidoeButtonIcon.src = "images/video_button_icon_white.png";
+                cameraButtonBox.id = '';
+                cameraButtonIcon.src = "images/camera_button_icon_white.png";
+            }
+            else if (videoButtonBox.id == 'active') {
+                videoButtonBox.id = '';
+                vidoeButtonIcon.src = "images/video_button_icon_white.png";
+                cameraButtonBox.id = '';
+                qrButtonBox.id = '';
+                qrButtonIcon.src = "images/qr_button_icon_white.png";
+
+                cameraButtonBox.id = 'active';
+                cameraButtonIcon.src = "images/camera_button_icon_black.png";
+            }
+        }
+
+
+
+
+
+
+        // let cameraMode = "environment";
+
+        // navigator.mediaDevices.getUserMedia({ video: { facingMode: cameraMode } })
+        //     .then(function (stream) {
+        //         video.srcObject = stream;
+        //         video.play();
+        //     })
+        //     .catch(function (err) {
+        //         console.error('Error accessing the camera.', err);
+        //     });
+
+        // video.addEventListener('play', function () {
+        //     const canvas = document.createElement('canvas');
+        //     const context = canvas.getContext('2d');
+        //     interval = s0etInterval(function () {
+        //         canvas.width = video.videoWidth;
+        //         canvas.height = video.videoHeight;
+        //         context.drawImage(video, 0, 0, canvas.width, canvas.height);
+        //         const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+        //         const code = jsQR(imageData.data, imageData.width, imageData.height, {
+        //             inversionAttempts: 'dontInvert',
+        //         });
+        //         if (code) {
+        //             if (code.data == "") {
+        //                 console.log('Scaned Empty');
+        //             }
+        //             else if (search.innerHTML.trim() == '') {
+        //                 search.innerHTML = code.data;
+        //                 console.log('QR Code detected:', code.data);
+        //                 search.style.height = '40px';
+        //                 var searchHeight = search.scrollHeight;
+        //                 search.style.height = searchHeight + 'px';
+        //                 beep.play();
+        //                 navigator.vibrate([200]);
+        //             }
+        //             else if (search.innerHTML.trim() !== '') {
+        //                 if (search.innerHTML == code.data) {
+        //                     console.log("Same data scanned");
+        //                     search.innerHTML = code.data;
+        //                     console.log('QR Code detected:', code.data);
+        //                     search.style.height = '40px';
+        //                     var searchHeight = search.scrollHeight;
+        //                     search.style.height = searchHeight + 'px';
+        //                 }
+        //                 else {
+        //                     search.innerHTML = code.data;
+        //                     console.log('QR Code detected:', code.data);
+        //                     search.style.height = '40px';
+        //                     var searchHeight = search.scrollHeight;
+        //                     search.style.height = searchHeight + 'px';
+        //                     beep.play();
+        //                     navigator.vibrate([200]);
+        //                 }
+        //             }
+        //             // You can do whatever you want with the scanned QR code data here
+        //             // For example, display it on the page or send it to a server
+        //         }
+        //     }, 100);
+        // });
+
+        // function changeCameraMode() {
+        //     rotateCam.removeAttribute('onclick');
+        //     rotateCam.style.backgroundColor = "gray";
+        //     rotateCam.style.boxShadow = "0 0 0 10px gray";
+        //     rotateCam.style.backgroundImage = "url('image_removed')";
+        //     if (cameraMode == "environment") {
+        //         cameraMode = "user";
+        //     }
+        //     else {
+        //         cameraMode = "environment";
+        //     }
+        //     countDown();
+        //     clearInterval(interval);
+        //     navigator.mediaDevices.getUserMedia({ video: { facingMode: cameraMode } })
+        //         .then(function (stream) {
+        //             video.srcObject = stream;
+        //             video.play();
+        //             message.style.color = "black";
+        //             message.style.backgroundColor = "rgb(146, 169, 232)";
+        //             message.innerHTML = "Scan &nbsp&nbsp[QR Code]";
+        //         })
+        //         .catch(function (err) {
+        //             console.error('Error accessing the camera.', err);
+        //             message.style.color = "white";
+        //             message.style.backgroundColor = "red";
+        //             message.innerHTML = "Note:-  *Camera Access is denied by your device!!!";
+        //         });
+        //     setTimeout(function () {
+        //         rotateCam.setAttribute("onclick", "changeCameraMode()");
+        //         rotateCam.style.backgroundColor = "white";
+        //         rotateCam.style.boxShadow = "0 0 0 10px white";
+        //         rotateCam.style.backgroundImage = "url('image/switch-camera.svg')";
+        //     }, 5000);
+        // }
+    </script>
+</body>
+
+</html>

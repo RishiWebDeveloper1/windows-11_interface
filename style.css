@@ -134,7 +134,7 @@ body {
     height: 30px;
     padding: 17px;
     color: white;
-    background-color: rgba(129, 128, 128, 0.596);
+    background-color: rgba(129, 128, 128, 0.509);
     border-radius: 30px;
     border: 0;
     outline: none;
@@ -157,7 +157,7 @@ body {
 }
 
 .search-bar:hover {
-    background-color: rgba(141, 137, 137, 0.596);
+    background-color: rgba(141, 137, 137, 0.518);
 }
 
 .task-bar-app-box {

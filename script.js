@@ -266,7 +266,7 @@ function createAllAppsBox() {
 
     if (allAppsBoxCheck == true) {
         let appNameList = [
-            ['File Explorer', 'Vs code', 'Chrome', 'YouTube'],
+            ['File Explorer', 'Vs code', 'Chrome', 'YouTube', 'Camera'],
             ['Tic Tac Toe', 'Sumo Wrestler', 'Hole Eater', 'Among Us'],
             ['Speaker Cleaner', 'QR Scanner']
         ];
@@ -275,14 +275,15 @@ function createAllAppsBox() {
             ['images/app_images/file_explorer_icon.png',
                 'images/app_images/vs-code_icon.png',
                 'images/app_images/chrome_icon.png',
-                'images/app_images/youtube_icon.png'],
+                'images/app_images/youtube_icon.png',
+                'images/app_images/apps_logo/camera_icon.png'],
             ['images/app_images/game_logo/XO_logo.png', 'images/app_images/game_logo/sumo_logo.jpeg', 'images/app_images/game_logo/hole_eater_logo.jpeg', 'images/app_images/game_logo/among_us_logo.jpg'],
             ['images/app_images/tools_logo/speaker_cleaner_logo.jpeg', 'images/app_images/tools_logo/QR_Scanner_logo.jpeg']
         ];
 
         let appUrlList = [
             ['components/apps/file_explorer/file_explorer.html', 'https://codewith.it/',
-                'components/apps/chrome/chrome.html', 'components/apps/youtube/youtube.html'],
+                'components/apps/chrome/chrome.html', 'components/apps/youtube/youtube.html', 'components/apps/camera/camera.html'],
             ['https://rishiwebdeveloper1.github.io/tic-tac-toe/', 'https://rishiwebdeveloper1.github.io/sumo_wrestler_game/', 'components/games/hole_eater/hole_eater.html', 'https://amogus.io/'],
             ['https://speaker-cleaner.netlify.app/', 'https://rishiwebdeveloper1.github.io/QR_Scanner/']
         ];

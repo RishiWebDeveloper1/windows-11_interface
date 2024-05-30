@@ -5,113 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Camera</title>
-    <style>
-        * {
-            padding: 0px;
-            margin: 0px;
-            list-style: none;
-            text-decoration: none;
-            box-sizing: border-box;
-            user-select: none;
-            font-family: 'Segoe UI';
-        }
-
-        .container {
-            width: 100%;
-            height: 100dvh;
-            background-color: rgb(34, 34, 34);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .setting-tool-box {
-            width: 50px;
-            height: 100%;
-            /* background-color: red; */
-        }
-
-        .camera-box {
-            width: calc(100% - 160px);
-            height: calc(100% - 100px);
-            /* background-color: rgb(0, 200, 255); */
-            border-radius: 20px;
-            overflow: hidden;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        #video {
-            width: calc(100% - 10px);
-            /* max-height: calc(100dvh - 200px); */
-            border-radius: 20px;
-            -webkit-transform: scaleX(-1);
-            transform: scaleX(-1);
-            /* aspect-ratio: 16 / 9; */
-        }
-
-        .button-tool-box {
-            width: 100px;
-            height: 100%;
-
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .button-box {
-            width: 40px;
-            height: 40px;
-            margin: 10px;
-            border-radius: 5px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .button-box:hover {
-            background-color: rgb(51, 54, 58);
-        }
-
-        .button-icon {
-            width: 25px;
-            height: 25px;
-        }
-
-        #active {
-            width: 70px;
-            height: 70px;
-            background-color: white;
-            box-shadow: 0 0 0 2px white;
-            border: 2px solid black;
-            border-radius: 100px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        #active:hover {
-            background-color: rgba(255, 255, 255, 0.765);
-        }
-
-        .slide-down-button-icon {
-            width: 40px;
-            transform: rotate(180deg);
-        }
-
-        .slide-up-button-icon {
-            width: 40px;
-        }
-
-        #captured-photo {
-            width: 60px;
-            height: 60px;
-            border-radius: 5px;
-            border: 1px solid white;
-        }
-    </style>
+    <link rel="stylesheet" href="camera.css">
 </head>
 
 <body>
@@ -138,144 +32,139 @@
             <div class="slide-down-button-box button-box">
                 <img src="images\up-arrow-tail-less.png" alt="" class="slide-down-button-icon">
             </div>
-            <img id="captured-photo" alt="">
+            <img id="captured-photo" alt="" onclick="closeImageViewer('from-camera')">
+        </div>
+    </div>
+    <div class="photo-viewer-box">
+        <img src="images/close_cross_icon.png" alt="" class="close-image-viewer"
+            onclick="closeImageViewer('from-viewer')">
+        <div class="image-box">
+            <img src="/images/app_images/file_explorer_icon.png" alt="" class="image">
+        </div>
+        <div class="photo-navigation-button">
+            <div class="left-button" onclick="perviousImage()">
+                <img src="images/arrow_triangle.png" alt="" class="left-button-icon">
+            </div>
+            <div class="right-button" onclick="nextImage()">
+                <img src="images/arrow_triangle.png" alt="" class="right-button-icon">
+            </div>
         </div>
     </div>
 
+    <script src="camera.js"></script>
     <script>
-
-        const video = document.getElementById('video');
-        const captureButton = document.querySelector('.camera-button-box');
-        const capturedPhoto = document.getElementById('captured-photo');
-        navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } })
-            .then(stream => {
-                video.srcObject = stream;
-            })
-            .catch(err => {
-                console.error('Error accessing the camera:', err);
-            });
-
-        captureButton.addEventListener('click', () => {
-            if (cameraButtonBox.id == 'active') {
-                const canvas = document.createElement('canvas');
-                canvas.width = video.videoWidth;
-                canvas.height = video.videoHeight;
-                const context = canvas.getContext('2d');
-                context.translate(canvas.width, 0);
-                context.scale(-1, 1);
-                context.drawImage(video, 0, 0, canvas.width, canvas.height);
-                const imageDataURL = canvas.toDataURL('image/png');
-                capturedPhoto.src = imageDataURL;
-                let num = 1;
-                let fileName = `camera_photo${num}.png`;
-                
-                while (localStorage.getItem(fileName) != null) {
-                    fileName = `camera_photo${num}.png`;
-                    console.log(fileName);
-                    num += 1;
-                    if (num == 100) {
-                        break;
-                    }
+        function showImage(num) {
+            let imagePreviewBox = document.querySelector('.image-box');
+            let imagePreview = document.querySelector('.image');
+            let getImage = localStorage.getItem(`camera_photo${num}.png`);
+            imagePreview.src = getImage;
+            imagePreview.id = num;
+            imagePreviewBox.style.display = 'flex';
+            setTimeout(() => {
+                if (imagePreview.naturalWidth > imagePreview.naturalHeight) {
+                    imagePreview.style.width = '100%';
+                    imagePreview.style.height = 'max-content';
                 }
-                localStorage.setItem(fileName, imageDataURL);
+                else {
+                    imagePreview.style.width = 'max-content';
+                    imagePreview.style.height = '100%';
+                }
+            }, 200);
+        }
+
+        document.addEventListener('DOMContentLoaded', imageMiniSetter);
+
+        function imageMiniSetter() {
+            let num = 1;
+            let fileName = `camera_photo${num}.png`;
+            let savedPhoto = localStorage.getItem('camera_photo.png');
+
+            while (1 == 1) {
+                fileName = `camera_photo${num}.png`;
+                if (localStorage.getItem(fileName) == null) {
+                    num = num - 1;
+                    console.log(num);
+                    showImage(num);
+                    savedPhoto = localStorage.getItem(`camera_photo${num}.png`);
+                    break;
+                }
+                if (num == 100) {
+                    break;
+                }
+                num += 1;
+                // console.log(fileName);
             }
-        });
-        document.addEventListener('DOMContentLoaded', () => {
-            const savedPhoto = localStorage.getItem('camera_photo.png');
+
             if (savedPhoto) {
                 capturedPhoto.src = savedPhoto;
             }
-        });
+        }
 
-        let vidoeButtonIcon = document.querySelector('.video-button-icon')
-        let videoButtonBox = document.querySelector('.video-button-box')
-        videoButtonBox.addEventListener('click', () => {
-            activeButton('video');
-        })
-        let cameraButtonIcon = document.querySelector('.camera-button-icon')
-        let cameraButtonBox = document.querySelector('.camera-button-box')
-        cameraButtonBox.addEventListener('click', () => {
-            activeButton('camera');
-        })
-        let qrButtonIcon = document.querySelector('.qr-button-icon')
-        let qrButtonBox = document.querySelector('.qr-button-box')
-        qrButtonBox.addEventListener('click', () => {
-            activeButton('qr');
-        })
-
-        function activeButton(buttonName) {
-            console.log('hello active button function is working');
-
-            let ButtonElement = document.querySelector(`.${buttonName}-button-box`);
-            videoButtonBox.id = '';
-            vidoeButtonIcon.src = "images/video_button_icon_white.png";
-            cameraButtonBox.id = '';
-            cameraButtonIcon.src = "images/camera_button_icon_white.png";
-            qrButtonBox.id = '';
-            qrButtonIcon.src = "images/qr_button_icon_white.png";
-            if (ButtonElement.id != "active") {
-                ButtonElement.id = "active";
-                document.querySelector(`.${buttonName}-button-icon`).src = `images/${buttonName}_button_icon_black.png`;
+        function nextImage() {
+            let imagePreviewBox = document.querySelector('.image-box');
+            let imagePreview = document.querySelector('.image');
+            let currentImage = imagePreview.id;
+            currentImage = parseInt(currentImage);
+            console.log(currentImage);
+            while (1 == 1) {
+                currentImage -= 1;
+                console.log("currentImage 0 " + currentImage);
+                if (localStorage.getItem(`camera_photo${currentImage}.png`) != null) {
+                    console.log("currentImage 1");
+                    currentImage += 1;
+                    break;
+                }
+                if (currentImage == 0) {
+                    console.log("currentImage 2");
+                    break;
+                }
+            }
+            console.log("currentImage 3");
+            if (currentImage > 1) {
+                console.log("currentImage 4");
+                currentImage -= 1;
+                showImage(currentImage);
             }
         }
 
-        let slideUpButtonBox = document.querySelector('.slide-up-button-box');
-        slideUpButtonBox.addEventListener('click', slideUpButtonArrow);
-        let slideDownButtonBox = document.querySelector('.slide-down-button-box');
-        slideDownButtonBox.addEventListener('click', slideDownButtonArrow);
-        function slideUpButtonArrow() {
-            // videoButtonBox.id = '';
-            // vidoeButtonIcon.src = "images/video_button_icon_white.png";
-            // cameraButtonBox.id = '';
-            // cameraButtonIcon.src = "images/camera_button_icon_white.png";
-            // qrButtonBox.id = '';
-            // qrButtonIcon.src = "images/qr_button_icon_white.png";
-            if (cameraButtonBox.id == 'active') {
-                videoButtonBox.id = 'active';
-                vidoeButtonIcon.src = "images/video_button_icon_black.png";
-
-                cameraButtonBox.id = '';
-                cameraButtonIcon.src = "images/camera_button_icon_white.png";
-                qrButtonBox.id = '';
-                qrButtonIcon.src = "images/qr_button_icon_white.png";
+        function perviousImage() {
+            let imagePreviewBox = document.querySelector('.image-box');
+            let imagePreview = document.querySelector('.image');
+            let currentImage = imagePreview.id;
+            currentImage = parseInt(currentImage);
+            console.log(currentImage)
+            while (1 == 1) {
+                currentImage += 1;
+                console.log("currentImage 0 " + currentImage);
+                if (localStorage.getItem(`camera_photo${currentImage}.png`) != null) {
+                    console.log("currentImage 1");
+                    currentImage -= 1;
+                    break;
+                }
+                if (currentImage == 100) {
+                    console.log("currentImage 2");
+                    break;
+                }
             }
-            else if (qrButtonBox.id == 'active') {
-                videoButtonBox.id = '';
-                vidoeButtonIcon.src = "images/video_button_icon_white.png";
-                cameraButtonBox.id = '';
-                qrButtonBox.id = '';
-                qrButtonIcon.src = "images/qr_button_icon_white.png";
-
-                cameraButtonBox.id = 'active';
-                cameraButtonIcon.src = "images/camera_button_icon_black.png";
+            console.log("currentImage 3 " + currentImage);
+            if (currentImage < 99) {
+                console.log("currentImage 4");
+                currentImage += 1;
+                showImage(currentImage);
             }
         }
 
-        function slideDownButtonArrow() {
-            if (cameraButtonBox.id == 'active') {
-                qrButtonBox.id = 'active';
-                qrButtonIcon.src = "images/qr_button_icon_black.png";
-
-                videoButtonBox.id = '';
-                vidoeButtonIcon.src = "images/video_button_icon_white.png";
-                cameraButtonBox.id = '';
-                cameraButtonIcon.src = "images/camera_button_icon_white.png";
+        function closeImageViewer(setBox) {
+            if (setBox == 'from-viewer') {
+                let photoViewerBox = document.querySelector('.photo-viewer-box').style.display = 'none';
+                let container = document.querySelector('.container').style.display = 'flex';
             }
-            else if (videoButtonBox.id == 'active') {
-                videoButtonBox.id = '';
-                vidoeButtonIcon.src = "images/video_button_icon_white.png";
-                cameraButtonBox.id = '';
-                qrButtonBox.id = '';
-                qrButtonIcon.src = "images/qr_button_icon_white.png";
-
-                cameraButtonBox.id = 'active';
-                cameraButtonIcon.src = "images/camera_button_icon_black.png";
+            else {
+                let photoViewerBox = document.querySelector('.photo-viewer-box').style.display = 'flex';
+                let container = document.querySelector('.container').style.display = 'none';
+                imageMiniSetter();
             }
         }
-
-
-
-
 
 
         // let cameraMode = "environment";

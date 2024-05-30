@@ -176,6 +176,8 @@
 
 .box-container {
     width: 45%;
+    min-width: 62px;
+    min-height: 30px;
     /* height: 26%; */
     aspect-ratio: 16 / 8;
     border-radius: 10px;
@@ -186,6 +188,8 @@
 .box1 {
     width: 43%;
     height: 100%;
+    min-width: 27px;
+    min-height: 31px;
     z-index: 999;
     background-color: rgba(100, 100, 100, 0.879);
     box-shadow: 0 0 0 0.6px white;
@@ -196,6 +200,8 @@
 .box2 {
     width: 43%;
     height: 100%;
+    min-width: 27px;
+    min-height: 31px;
     z-index: 999;
     background-color: rgba(100, 100, 100, 0.879);
     box-shadow: 0 0 0 0.6px white;
@@ -206,6 +212,8 @@
 .box3 {
     width: 63%;
     height: 100%;
+    min-width: 40px;
+    min-height: 31px;
     z-index: 999;
     background-color: rgba(100, 100, 100, 0.879);
     box-shadow: 0 0 0 0.6px white;
@@ -216,6 +224,8 @@
 .box4 {
     width: 23%;
     height: 100%;
+    min-width: 14px;
+    min-height: 31px;
     z-index: 999;
     background-color: rgba(100, 100, 100, 0.879);
     box-shadow: 0 0 0 0.6px white;
@@ -226,6 +236,8 @@
 .box5 {
     width: 28%;
     height: 100%;
+    min-width: 18px;
+    min-height: 31px;
     z-index: 999;
     background-color: rgba(100, 100, 100, 0.879);
     box-shadow: 0 0 0 0.6px white;
@@ -236,6 +248,8 @@
 .box6 {
     width: 28%;
     height: 100%;
+    min-width: 18px;
+    min-height: 31px;
     z-index: 999;
     background-color: rgba(100, 100, 100, 0.879);
     box-shadow: 0 0 0 0.6px white;
@@ -244,6 +258,8 @@
 .box7 {
     width: 28%;
     height: 100%;
+    min-width: 18px;
+    min-height: 31px;
     z-index: 999;
     background-color: rgba(100, 100, 100, 0.879);
     box-shadow: 0 0 0 0.6px white;
@@ -253,6 +269,8 @@
 
 .box-container3 {
     width: 48%;
+    min-width: 67px;
+    min-height: 33px;
     /* height: 28%; */
     aspect-ratio: 16 / 8;
     border-radius: 10px;
@@ -265,6 +283,8 @@
 .box8 {
     width: 43%;
     height: 45%;
+    min-width: 30px;
+    min-height: 15px;
     z-index: 999;
     background-color: rgba(100, 100, 100, 0.879);
     box-shadow: 0 0 0 0.6px white;
@@ -274,6 +294,8 @@
 .box9 {
     width: 43%;
     height: 45%;
+    min-width: 30px;
+    min-height: 15px;
     z-index: 999;
     background-color: rgba(100, 100, 100, 0.879);
     box-shadow: 0 0 0 0.6px white;
@@ -283,6 +305,8 @@
 .box10 {
     width: 43%;
     height: 45%;
+    min-width: 30px;
+    min-height: 15px;
     z-index: 999;
     background-color: rgba(100, 100, 100, 0.879);
     box-shadow: 0 0 0 0.6px white;
@@ -292,6 +316,8 @@
 .box11 {
     width: 43%;
     height: 45%;
+    min-width: 30px;
+    min-height: 15px;
     z-index: 999;
     background-color: rgba(100, 100, 100, 0.879);
     box-shadow: 0 0 0 0.6px white;

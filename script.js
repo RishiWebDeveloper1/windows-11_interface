@@ -995,7 +995,7 @@ function removeContextMenuBox() {
     }
 }
 
-function handleKeyPress(event) {
+function handleKeyPressX(event) {
     event.preventDefault();
     // console.log(event)
     if (event.key === "Meta" || event.key === "Windows") {

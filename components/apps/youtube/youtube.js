@@ -68,10 +68,10 @@ function displaySearchResults(results) {
 
 function storeDataToLocal(title, videoId, discription, channelId) {
 
-    let getTitle = localStorage.setItem('title-youtube', title);
-    let getUrl = localStorage.setItem('url-youtube', videoId);
-    let getDiscription = localStorage.setItem('discription-youtube', discription);
-    let getchannelId = localStorage.setItem('channelId-youtube', channelId);
+    localStorage.setItem('title-youtube', title);
+    localStorage.setItem('url-youtube', videoId);
+    localStorage.setItem('discription-youtube', discription);
+    localStorage.setItem('channelId-youtube', channelId);
 
     window.location.href = "components/video_player/video_player.html";
 }
@@ -89,10 +89,11 @@ function storeQuery(query) {
 // const apiKey = 'AIzaSyCkzOqQxFUSEBsN7pO_W797gQCZJ9_haM4'; // my own key
 // const apiKey = 'AIzaSyB61dCiMiNQ0njfW4uUCORhE2P96oQrMs0';
 // const apiKey = 'AIzaSyDQvEF9PuhdW3JJM28VQZXQGOo84iYvd-Q';
-const apiKey = 'AIzaSyAwM_RLjqj8dbbMAP5ls4qg1olDsaxSq5s';
 // const apiKey = 'AIzaSyAzfFLwjVLNVIHbBf8EWOSH3nCE0zLgF44';
-// const apiKey = 'AIzaSyAn8h71VOzmap8ve9kxoCHqKoE_T79ADD8';
+const apiKey = 'AIzaSyAn8h71VOzmap8ve9kxoCHqKoE_T79ADD8'; //h
 // const apiKey = 'AIzaSyD3WKXZwbplcvQ2BlmIj4n3FlyFpvY_47M';
+
+// const apiKey = 'AIzaSyAwM_RLjqj8dbbMAP5ls4qg1olDsaxSq5s';
 
 const maxResults = 10;
 
@@ -121,11 +122,11 @@ const channels = [
     'UCttspZesZIDEwwpVIgoZtWQ'  // India TV
 ];
 
-const movieQueries = ['Latest Bhojpuri Movies', 'New Bhojpuri Movies'];
+const movieQueries = ['Latest Hindi Movies', 'New hollywood Movies', 'cartoon in hind', 'new comedy video'];
+
 const newsQueries = ['Latest News hindi', 'Breaking News hindi', 'Recent News hindi', 'hindi news', 'yesterday news hindi'];
 
 function getRandomElement(arr) {
-    console.log(arr[Math.floor(Math.random() * arr.length)]);
     return arr[Math.floor(Math.random() * arr.length)];
 }
 
@@ -159,9 +160,10 @@ function fetchVideos(previousClear) {
         if (previousClear == 'previousClear') {
             searchResults.innerHTML = '';
         }
-        
+
         url = `https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&key=${apiKey}&maxResults=${maxResults}&part=snippet&type=video`;
-    } else {
+    }
+    else {
         randomQuery = getRandomQuery();
         url = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&part=snippet&${randomQuery}&type=video&maxResults=${maxResults}`;
     }
@@ -188,26 +190,39 @@ function fetchVideoDetails(videoIds) {
 function displayVideos(videos) {
 
     videos.forEach(video => {
-        // console.log(video)
         const title = discriptionRepair(video.snippet.title);
         const videoId = video.id;
         const thumbnailUrl = video.snippet.thumbnails.high.url;
         let discription = discriptionRepair(video.snippet.description);
         const channelId = video.snippet.channelId;
         let duration = formatDuration(video.contentDetails.duration);
-
-        const resultItem = document.createElement('div');
-        resultItem.classList.add('search-result');
-        resultItem.innerHTML = `
-        <div class="video-detail-box" onclick="storeDataToLocal(${`\`${title}\``}, '${videoId}', ${`\`${discription}\``}, '${channelId}')">
-            <img class="thumbnail-image" src="${thumbnailUrl}" alt="${title}">
-            <div class="duration">${duration}</div>
-            <h3 class="title">${title}</h3>
-        </div>
-    `;
-
-        searchResults.appendChild(resultItem);
+        let durationCheck = durationChecker(duration);
+        
+        if (durationCheck == true) {
+            const resultItem = document.createElement('div');
+            resultItem.classList.add('search-result');
+            resultItem.innerHTML = `
+                <div class="video-detail-box" onclick="storeDataToLocal(${`\`${title}\``}, '${videoId}', ${`\`${discription}\``}, '${channelId}')">
+                    <img class="thumbnail-image" src="${thumbnailUrl}" alt="${title}">
+                    <div class="duration">${duration}</div>
+                    <h3 class="title">${title}</h3>
+                </div>
+            `;
+    
+            searchResults.appendChild(resultItem);
+        }
     });
+}
+
+function durationChecker(durationString) {
+    let duration = durationString.split('');
+    let test = duration[duration.length - 5] + duration[duration.length - 4];
+    if (test == "00") {
+        return false;
+    }
+    else {
+        return true;
+    }
 }
 
 function discriptionRepair(text) {
@@ -224,16 +239,12 @@ function discriptionRepair(text) {
 
 document.addEventListener('DOMContentLoaded', () => {
     searchResults.innerHTML = '';
-    console.log("outside the if");
     fetchVideos();
     let showMore = document.querySelector('.show_more');
     showMore.addEventListener('click', fetchVideos);
-    
+
     setTimeout(() => {
-        console.log(searchResults.innerHTML == '');
-        // console.log(searchResults.innerHTML);
         if (searchResults.innerHTML == '') {
-            console.log("inside the if");
             fetchVideos();
         }
     }, 1000);

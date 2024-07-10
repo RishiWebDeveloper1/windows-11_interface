@@ -150,7 +150,7 @@ function createStartMenu() {
             'components/apps/file_explorer/file_explorer.html',
             'https://codewith.it/',
             'components/apps/chrome/chrome.html',
-            'components/apps/youtube/youtube.html',
+            'https://rishiwebdeveloper1.github.io/youtube_clone/',
             'components/apps/camera/camera.html'
         ];
 
@@ -286,7 +286,7 @@ function createAllAppsBox() {
 
         let appUrlList = [
             ['components/apps/file_explorer/file_explorer.html', 'https://codewith.it/',
-                'components/apps/chrome/chrome.html', 'components/apps/youtube/youtube.html', 'components/apps/camera/camera.html'],
+                'components/apps/chrome/chrome.html', 'https://rishiwebdeveloper1.github.io/youtube_clone/', 'components/apps/camera/camera.html'],
             ['https://rishiwebdeveloper1.github.io/tic-tac-toe/', 'https://rishiwebdeveloper1.github.io/sumo_wrestler_game/', 'components/games/hole_eater/hole_eater.html', 'https://amogus.io/'],
             ['https://speaker-cleaner.netlify.app/', 'https://rishiwebdeveloper1.github.io/QR_Scanner/']
         ];
